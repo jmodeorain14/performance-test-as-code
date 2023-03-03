@@ -1,0 +1,49 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  
+  blazemeter-taurus-load-test:
+    image: blazemeter/taurus
+    container_name: blazemeter-taurus-load-test
+    command: /TaurusLoadTesting/scripts/execution.yml /TaurusLoadTesting/scripts/passfail.yml
+    volumes:
+      - ./taurus/scripts:/TaurusLoadTesting/scripts
+      - ./taurus/artifacts:/TaurusLoadTesting/artifacts
+  
+  telegraf:
+    image: telegraf:1.19
+    container_name: telegraf
+    volumes:
+      - ${TELEGRAF_CFG_PATH}:/etc/telegraf/telegraf.conf:rw
+    env_file:
+      - .env
+    depends_on:
+      - influxdb
+  
+  influxdb:
+    image: influxdb:2.1.1
+    container_name: influxdb
+    volumes:
+      - influxdb_data:/var/lib/influxdb2:rw
+    env_file:
+      - .env
+    entrypoint: ["./entrypoint.sh"]
+    restart: on-failure:10
+    ports:
+      - ${DOCKER_INFLUXDB_INIT_PORT}:${DOCKER_INFLUXDB_INIT_PORT}
+  
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-server
+    volumes:
+     - grafana_data:/var/lib/grafana:rw
+    depends_on:
+     - influxdb
+    ports:
+     - ${GRAFANA_PORT}:3000
+  
+volumes:
+  grafana_data:
+  influxdb_data:

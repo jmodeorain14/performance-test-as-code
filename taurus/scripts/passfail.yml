@@ -1,0 +1,5 @@
+reporting:
+  - module: passfail 
+    criteria: 
+      - avg-rt>10s for 7s, stop as failed
+      - fail of homepage>10% for 10s, stop as failed

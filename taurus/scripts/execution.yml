@@ -1,0 +1,48 @@
+execution:
+- concurrency: 2  
+  ramp-up: 30s
+  hold-for: 1m
+  scenario: reach-home-page-jmeter-test
+
+scenarios:
+  reach-home-page-jmeter-test:
+    store-cache: true
+    store-cookie: true
+    think-time: 1s
+    timeout: 500ms
+    keepalive: true
+    retrieve-resources: true
+    concurrent-pool-size: 4
+    use-dns-cache-mgr: true
+    requests:
+      - url: https://bbc.com/
+        method: GET
+        label: homepage
+        assert:
+          - contains:
+            - British Broadcasting Corporation
+            subject: body # subject for search
+            regexp: true # treat string as regular expression
+            not: false # invert condition - fail if found
+            assume-success: false # mark sample successful before asserting it
+        jsr223: log.info("Test message for logs") # inline script to execute, unless script-file is specified
+      - url: https://bbc.com/news
+        method: GET
+        label: news
+      - url: https://www.bbc.com/news/world
+        method: GET
+        label: world
+
+reporting:
+  - module: final-stats
+    summary: true # overall samples count and percent of failures
+    percentiles: true # display average times and percentiles
+    summary-labels: false # provides list of sample labels, status, percentage of completed, avg time and errors
+    failed-labels: false # provides list of sample labels with failures
+    test-duration: true # provides test duration
+    dump-xml: /TaurusLoadTesting/artifacts/execution-final-stats.xml
+    dump-csv: /TaurusLoadTesting/artifacts/execution-final-stats.csv
+  - module: console
+  - module: junit-xml
+    filename: /TaurusLoadTesting/artifacts/execution-junit.xml
+    data-source: pass-fail
