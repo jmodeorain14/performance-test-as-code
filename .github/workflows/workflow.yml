@@ -1,4 +1,4 @@
-name: Baseline Test
+name: Execute Performance Test
 
 on: 
   push:
@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ master ]
 
-permissions:
-  contents: read
+#permissions:
+#  contents: read
 
 jobs:
   
