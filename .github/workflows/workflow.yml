@@ -10,6 +10,7 @@ permissions:
   contents: read
 
 jobs:
+  '''
   build:
 
     runs-on: ubuntu-latest
@@ -18,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
-
+  '''
   performance-test:
 
     runs-on: ubuntu-latest
@@ -30,3 +31,4 @@ jobs:
       with:
           taurus_project_folder_name: 'taurus/scripts'
           taurus_command_line: execution.yml passfail.yml -report
+          blazemeter_api_token: bc42d9e3d91048039e9e9f93:6f477aa6268ed0c8fdcb266945f6804d4d8c7f4b79ac73a3451c97a3267a038ee10e9592
