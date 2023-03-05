@@ -6,6 +6,8 @@ execution:
 
 scenarios:
   reach-home-page-jmeter-test:
+    data-sources:
+    - test_data.csv
     store-cache: true
     store-cookie: true
     think-time: 1s
@@ -15,7 +17,7 @@ scenarios:
     concurrent-pool-size: 4
     use-dns-cache-mgr: true
     requests:
-      - url: https://bbc.com/
+      - url: ${host}
         method: GET
         label: homepage
         assert:
@@ -26,9 +28,9 @@ scenarios:
             not: false # invert condition - fail if found
             assume-success: false # mark sample successful before asserting it
         jsr223: log.info("Test message for logs") # inline script to execute, unless script-file is specified
-      - url: https://bbc.com/news
+      - url: ${host}${path_news}
         method: GET
         label: news
-      - url: https://www.bbc.com/news/world
+      - url: ${host}${path_news}${path_news_world}
         method: GET
         label: world
