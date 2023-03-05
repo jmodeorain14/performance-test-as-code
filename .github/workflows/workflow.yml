@@ -15,3 +15,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
+    
+      - uses: actions/taurus-action@v1
+        with:
+          taurus_project_folder_name: 'taurus/scripts'
+          taurus_command_line: execution.yml passfail.yml -report
