@@ -32,9 +32,6 @@ jobs:
     - name: Run docker-compose
       run: docker-compose up -d
 
-    - name: Build the TIG stack
-      run: docker-compose up -d
-    
     - name: Check running containers before Taurus test execution
       run: docker ps -a
 
