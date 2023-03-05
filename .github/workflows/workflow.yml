@@ -32,6 +32,9 @@ jobs:
     - name: Check running containers before Taurus test execution
       run: docker ps -a
 
+    - name: Debug statements
+      run: docker logs backend
+
 #    - name: Get current date
 #      id: date
 #      run: echo "::set-output name=today::$(date +'%m-%d-%Y')"
