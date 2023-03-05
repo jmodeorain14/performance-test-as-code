@@ -33,8 +33,6 @@ jobs:
     - name: Check running containers before Taurus test execution
       run: docker ps -a
 
-#    - name: Check logs
-#      run: docker logs
 
     - uses: actions/checkout@v3
     - name: Prepare and execute Taurus test
@@ -43,6 +41,19 @@ jobs:
           taurus_project_folder_name: 'taurus/scripts'
           taurus_command_line: execution.yml passfail.yml -report
           blazemeter_api_token: bc42d9e3d91048039e9e9f93:6f477aa6268ed0c8fdcb266945f6804d4d8c7f4b79ac73a3451c97a3267a038ee10e9592
+  
+    - name: Post to a Slack channel
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # Slack channel id, channel name, or user id to post message.
+        # See also: https://api.slack.com/methods/chat.postMessage#channels
+        # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
+        channel-id: 'performance-test-as-code'
+        # For posting a simple plain text message
+        slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
     - name: Check running containers after Taurus test execution
       run: docker ps -a
