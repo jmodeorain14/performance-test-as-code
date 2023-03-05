@@ -34,7 +34,7 @@ jobs:
       run: docker ps -a
 
     - name: Check logs
-      run: docker logs backend
+      run: docker logs
 
     - uses: actions/checkout@v3
     - name: Prepare and execute Taurus test
