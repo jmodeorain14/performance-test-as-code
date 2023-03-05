@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -15,9 +15,13 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
-    
-      - name: taurus-action
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
       - uses: Rbillon59/taurus-action@v0.1-beta
-        with:
-          taurus_project_folder_name: 'taurus/scripts'
-          taurus_command_line: execution.yml passfail.yml -report
+      - name: taurus-action
+      - taurus_project_folder_name: 'taurus/scripts'
+      - taurus_command_line: execution.yml passfail.yml -report
