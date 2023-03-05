@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: Rbillon59/taurus-action@v0.1-beta
-      - name: taurus-action
-      - taurus_project_folder_name: 'taurus/scripts'
-      - taurus_command_line: execution.yml passfail.yml -report
+      uses: actions/taurus-action@v1
+      with:
+        taurus_project_folder_name: 'my-scenario'
+        taurus_command_line: execution.yml passfail.yml -report
