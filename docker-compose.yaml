@@ -42,7 +42,7 @@ services:
     depends_on:
      - influxdb
     ports:
-     - ${GRAFANA_PORT}:3000
+     - ${GRAFANA_PORT}:${GRAFANA_PORT}
   
 volumes:
   grafana_data:
