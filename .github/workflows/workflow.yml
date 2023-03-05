@@ -38,8 +38,14 @@ jobs:
     - name: Check running containers before Taurus test execution
       run: docker ps -a
 
-    - name: Debug statements
-      run: docker logs backend
+    - name: Debug telegraf container
+      run: docker logs telegraf
+
+    - name: Debug influxdb container
+      run: docker logs influxdb
+    
+    - name: Debug grafana-server container
+      run: docker logs grafana-server
 
 #    - name: Get current date
 #      id: date
