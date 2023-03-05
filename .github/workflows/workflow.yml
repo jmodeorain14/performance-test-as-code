@@ -1,4 +1,4 @@
-name: Taurus Test
+name: Baseline Test
 
 on: 
   push:
@@ -33,6 +33,8 @@ jobs:
     - name: Check running containers before Taurus test execution
       run: docker ps -a
 
+    - name: Get current date
+      run: echo "::set-output name=today::$(date +'%m-%d-%Y')"
 
     - uses: actions/checkout@v3
     - name: Prepare and execute Taurus test
