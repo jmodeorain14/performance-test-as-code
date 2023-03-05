@@ -31,6 +31,6 @@ scenarios:
       - url: ${host}${path_news}
         method: GET
         label: news
-      - url: ${host}${path_news}${path_news_world}
+      - url: ${host}${path_news_world}
         method: GET
         label: world
