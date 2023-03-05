@@ -59,5 +59,3 @@ jobs:
 
     - name: Check running containers after Taurus test execution
       run: docker ps -a
-
-      CMD tail -f /dev/null
