@@ -1,10 +1,13 @@
-name: Docker Compose Actions Workflow
+name: Taurus Test
 
 on: 
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -16,12 +19,14 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
 
-  test:
+  performance-test:
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/taurus-action@v1
-        with:
-          taurus_project_folder_name: 'my-scenario'
+    - uses: actions/checkout@v3
+    - name: Prepare Taurus Test
+      uses: Rbillon59/taurus-action@v0.1-beta
+      with:
+          taurus_project_folder_name: 'taurus/scripts'
           taurus_command_line: execution.yml passfail.yml -report
