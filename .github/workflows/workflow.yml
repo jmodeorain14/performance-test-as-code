@@ -10,16 +10,16 @@ permissions:
   contents: read
 
 jobs:
-  '''
-  build:
+  
+#  build:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Build the stack
+#        run: docker-compose up -d
 
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run: docker-compose up -d
-  '''
   performance-test:
 
     runs-on: ubuntu-latest
