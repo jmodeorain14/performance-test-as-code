@@ -26,6 +26,12 @@ jobs:
 
     steps:
 
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Run docker-compose
+      run: docker-compose up -d
+
     - name: Build the TIG stack
       run: docker-compose up -d
     
