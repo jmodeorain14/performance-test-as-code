@@ -16,8 +16,8 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
     
-      - uses: Rbillon59/taurus-action@v0.1-beta
       - name: taurus-action
-        with:
+      - uses: Rbillon59/taurus-action@v0.1-beta
+      - with:
           taurus_project_folder_name: 'taurus/scripts'
           taurus_command_line: execution.yml passfail.yml -report
