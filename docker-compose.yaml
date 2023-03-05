@@ -4,13 +4,13 @@ version: '3.8'
 
 services:
   
-  blazemeter-taurus-load-test:
-    image: blazemeter/taurus
-    container_name: blazemeter-taurus-load-test
-    command: /TaurusLoadTesting/scripts/execution.yml /TaurusLoadTesting/scripts/passfail.yml
-    volumes:
-      - ./taurus/scripts:/TaurusLoadTesting/scripts
-      - ./taurus/artifacts:/TaurusLoadTesting/artifacts
+#  blazemeter-taurus-load-test:
+#    image: blazemeter/taurus
+#    container_name: blazemeter-taurus-load-test
+#    command: /TaurusLoadTesting/scripts/execution.yml /TaurusLoadTesting/scripts/passfail.yml
+#    volumes:
+#      - ./taurus/scripts:/TaurusLoadTesting/scripts
+#      - ./taurus/artifacts:/TaurusLoadTesting/artifacts
   
   telegraf:
     image: telegraf:1.19
