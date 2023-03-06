@@ -31,8 +31,6 @@ services:
       - .env
     entrypoint: ["./entrypoint.sh"]
     restart: on-failure:10
-    expose:
-      - 8086
     ports:
       - ${DOCKER_INFLUXDB_INIT_PORT}:${DOCKER_INFLUXDB_INIT_PORT}
   
@@ -43,8 +41,6 @@ services:
      - grafana_data:/var/lib/grafana:rw
     depends_on:
      - influxdb
-    expose:
-      - 3000
     ports:
      - ${GRAFANA_PORT}:3000
   
